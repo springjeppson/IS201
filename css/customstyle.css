@@ -1,0 +1,296 @@
+body {  
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.common {
+    /* border: 2px solid #636161; */
+    position: absolute;
+}
+
+.header {
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    height: 100px;
+    z-index: 2;
+    font-family: fantasy;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.leftmenuwords {
+    top: 134px;
+    left: 5px;
+    width: 150px;
+    height: 670px;
+    z-index: 1; 
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 10px; 
+    color: rgb(61, 60, 60);
+    border-right: 2px solid #636161; 
+}
+
+.leftmenuwords img {
+    width: 100%;
+    max-height: 250px;
+    height: auto;
+    display: block; 
+    margin: 20px auto 0; 
+} 
+
+.rightmenu {
+    top: 134px;
+    right: 5px;
+    width: 200px;
+    height: 670px;
+    padding-left: 10px;
+    padding-right: 5px;
+    color: rgb(61, 60, 60); 
+    border-left: 2px solid #636161; 
+}
+
+.rightmenu img {
+    height: 100%;
+    max-height: 250px;
+    height: auto;
+    display: block; 
+    margin: 20px auto 0; 
+} 
+
+.mainbody {
+    top: 114px;
+    left: 174px;
+    right: 224px;
+    height: 690px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+}
+
+.mainbody iframe {
+    display: block; 
+    margin: 20px auto 0; 
+} 
+
+.container {
+    display: flex;
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+    gap: 10px;
+    padding: 10px;
+}
+
+.tokoroa {
+    top: 818px;
+    left: 5px;
+    right: 5px;
+    height: 400px; 
+    box-sizing: border-box;
+    border-top: 3px solid #636161;  
+}
+
+.tokoroa img {
+    width: 100%; /* Make the image responsive */
+    max-width: 350px;
+    height: auto;
+    display: block; /* Ensures image behaves like a block element */
+    margin: 20px auto 0; 
+}    
+
+.tokoroawords {
+    width: 73%;
+    right: 5px;
+    height: 200px;
+    padding-right: 12px;
+}
+
+.tauranga {
+    top: 1222px;
+    right: 5px;
+    left: 5px;
+    height: 400px;
+    box-sizing: border-box;
+    border-top: 3px solid #636161;
+}
+
+.tauranga img {
+    width: 100%; 
+    max-width: 350px;
+    height: auto;
+    display: block; 
+    margin: 20px auto 0; 
+}    
+
+.taurangawords {
+    width: 73%;
+    right: 5px;
+    height: 200px;
+    padding-right: 12px;
+}
+
+.southauckland {
+    top: 1626px;
+    left: 5px;
+    right: 5px;
+    height: 400px;
+    box-sizing: border-box; 
+    border-top: 3px solid #636161;
+}
+
+.southauckland img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    display: block; 
+    margin: 20px auto 0; 
+}  
+
+.southaucklandwords {
+    width: 73%;
+    right: 5px;
+    height: 200px;
+    padding-right: 12px;
+}
+
+.papakura {
+    top: 2030px;
+    right: 5px;
+    left: 5px; 
+    height: 400px;
+    box-sizing: border-box; 
+    border-top: 3px solid #636161;
+}
+
+.papakura img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    display: block; 
+    margin: 20px auto 0; 
+}  
+
+.papakurawords {
+    width: 73%;
+    right: 5px;
+    height: 200px;
+    padding-right: 12px;
+}
+
+.hamilton {
+    top: 2434px;
+    left: 5px;
+    right: 5px;
+    height: 400px; 
+    box-sizing: border-box;
+    border-top: 3px solid #636161; 
+}
+
+.hamilton img {
+    height: 100%;
+    max-height: 270px;
+    height: auto;
+    display: block; 
+    margin: 20px auto 0; 
+}  
+
+.hamiltonwords {
+    width: 83%;
+    right: 5px;
+    height: 200px;
+    padding-right: 12px;
+}
+
+.marae {
+    top: 2838px;
+    right: 5px;
+    left: 5px;
+    height: 400px;
+    box-sizing: border-box;
+    border-top: 3px solid #636161;
+}
+
+.marae img {
+    height: 100%;
+    max-height: 270px;
+    height: auto;
+    display: block; 
+    margin: 20px auto 0; 
+}  
+
+.maraewords {
+    width: 78%;
+    right: 5px;
+    height: 200px;
+    padding-right: 12px;
+}
+
+.lake {
+    top: 3242px;
+    left: 5px;
+    right: 5px; 
+    height: 400px;
+    box-sizing: border-box;
+    border-top: 3px solid #636161; 
+}
+
+.lake img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    display: block; 
+    margin: 20px auto 0; 
+} 
+
+.lakewords {
+    width: 74%;
+    right: 5px;
+    height: 200px;
+    padding-right: 12px;
+}
+
+.huka {
+    top: 3646px;
+    right: 5px;
+    left: 5px;
+    height: 400px;
+    box-sizing: border-box; 
+    border-top: 3px solid #636161;
+    border-bottom: 3px solid #636161;
+}
+
+.huka img {
+    height: 100%;
+    max-height: 270px;
+    height: auto;
+    display: block; 
+    margin: 20px auto 0; 
+} 
+
+.hukawords {
+    width: 83%;
+    right: 5px;
+    height: 200px;
+    padding-right: 12px;
+}
+
+.tableau {
+    top: 4050px;
+    left: 174px;
+    right: 224px;
+    height: 900px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+}
+
+.footer {
+    top: 4954px;
+    left: 5px;
+    right: 5px;
+    height: 100px;
+    z-index: 2; 
+    color: rgb(82, 80, 80); 
+    border-top: 3px solid #636161;
+    padding: 10px;
+}
