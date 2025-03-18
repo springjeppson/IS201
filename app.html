@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Clone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #cac7c7;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: crimson;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            grid-gap: 10px;
+            justify-content: center;
+            margin: 20px auto;
+        }
+        .tile {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #444;
+        }
+        .tile.correct {
+            background-color: #6aaa64;
+        }
+        .tile.present {
+            background-color: #c9b458;
+        }
+        .tile.absent {
+            background-color: #787c7e;
+        }
+        input {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5em;
+            text-align: center;
+            background-color: #444;
+            border: 1px solid #fff;
+            margin: 5px;
+            color: #fff;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #fff;
+        }
+        .restart-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #444;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        .restart-btn:hover {
+            background-color: #666;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #2d2d2d;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #fff;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <a href="newzealand.html" id="top">Go Back</a>
+<h1>New Zealand Themed Wordle Clone</h1>
+<div class="grid">
+    <!-- 6 rows, 5 columns -->
+    <div class="tile" id="row0col0"></div>
+    <div class="tile" id="row0col1"></div>
+    <div class="tile" id="row0col2"></div>
+    <div class="tile" id="row0col3"></div>
+    <div class="tile" id="row0col4"></div>
+    
+    <div class="tile" id="row1col0"></div>
+    <div class="tile" id="row1col1"></div>
+    <div class="tile" id="row1col2"></div>
+    <div class="tile" id="row1col3"></div>
+    <div class="tile" id="row1col4"></div>
+
+    <div class="tile" id="row2col0"></div>
+    <div class="tile" id="row2col1"></div>
+    <div class="tile" id="row2col2"></div>
+    <div class="tile" id="row2col3"></div>
+    <div class="tile" id="row2col4"></div>
+
+    <div class="tile" id="row3col0"></div>
+    <div class="tile" id="row3col1"></div>
+    <div class="tile" id="row3col2"></div>
+    <div class="tile" id="row3col3"></div>
+    <div class="tile" id="row3col4"></div>
+
+    <div class="tile" id="row4col0"></div>
+    <div class="tile" id="row4col1"></div>
+    <div class="tile" id="row4col2"></div>
+    <div class="tile" id="row4col3"></div>
+    <div class="tile" id="row4col4"></div>
+
+    <div class="tile" id="row5col0"></div>
+    <div class="tile" id="row5col1"></div>
+    <div class="tile" id="row5col2"></div>
+    <div class="tile" id="row5col3"></div>
+    <div class="tile" id="row5col4"></div>
+</div>
+
+<input type="text" id="guessInput" maxlength="5" placeholder="Enter Guess">
+<button onclick="checkGuess()">Submit Guess</button>
+<p class="message" id="message"></p>
+<button class="restart-btn" onclick="restartGame()">Restart</button>
+
+<!-- Modal for Word Fact -->
+<div id="wordFactModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Did you know?</h2>
+    <p id="wordFact"></p>
+  </div>
+</div>
+
+<script>
+    // List of possible words with corresponding facts
+    const wordList = {
+        "KIWIS": "Kiwis are the national bird of New Zealand.",
+        "AROHA": "Aroha means love in Maori.",
+        "MAORI": "Te-reo Maori is the official language of New Zealand, along with English.",
+        "MARAE": "Maraes are communal meeting grounds for Maori people.",
+        "ENZED": "Enzed is the pronunciation of the letter 'Z' in New Zealand.",
+    };
+    
+    // Randomly choose a word from the list
+    let correctWord = Object.keys(wordList)[Math.floor(Math.random() * Object.keys(wordList).length)];
+    let currentRow = 0;
+
+    function checkGuess() {
+        const guess = document.getElementById('guessInput').value.toUpperCase();
+        
+        if (guess.length !== 5) {
+            document.getElementById('message').innerText = 'Please enter a 5-letter word.';
+            return;
+        }
+
+        if (guess === correctWord) {
+            updateTiles(guess, 'correct');
+            document.getElementById('message').innerText = 'Congratulations! You guessed it right!';
+            showWordFact();
+            return;
+        }
+
+        if (currentRow < 6) {
+            updateTiles(guess);
+            currentRow++;
+            if (currentRow === 6) {
+                document.getElementById('message').innerText = 'Game over! The word was: ' + correctWord;
+            }
+        }
+    }
+
+    function updateTiles(guess, result = '') {
+        for (let i = 0; i < 5; i++) {
+            const tile = document.getElementById(`row${currentRow}col${i}`);
+            tile.innerText = guess[i];
+            if (guess[i] === correctWord[i]) {
+                tile.classList.add('correct');
+            } else if (correctWord.includes(guess[i])) {
+                tile.classList.add('present');
+            } else {
+                tile.classList.add('absent');
+            }
+        }
+    }
+
+    function showWordFact() {
+        const fact = wordList[correctWord];
+        document.getElementById('wordFact').innerText = fact;
+        document.getElementById('wordFactModal').style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById('wordFactModal').style.display = "none";
+    }
+
+    function restartGame() {
+        currentRow = 0;
+        correctWord = Object.keys(wordList)[Math.floor(Math.random() * Object.keys(wordList).length)];  // Pick a new word
+        document.getElementById('guessInput').value = '';
+        document.getElementById('message').innerText = '';
+        const tiles = document.querySelectorAll('.tile');
+        tiles.forEach(tile => {
+            tile.classList.remove('correct', 'present', 'absent');
+            tile.innerText = '';
+        });
+        closeModal();
+    }
+</script>
+
+</body>
+</html>
